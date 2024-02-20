@@ -11,37 +11,37 @@
 <body>
 
     <?php
-
     // Write your code to retrieve data
-    $conn = mysqli_connect("localhost:3308", "root", "", "phpparina");
+    $conn = mysqli_connect("localhost:3307", "root", "", "php_database");
     if (!$conn) {
         die('Connection Failed : ');
     } else {
         echo "Connection Successful...<br/>";
-        $select_query = "select * from reg_table";
+        $select_query = "select * from reg_info";
         $select = mysqli_query($conn, $select_query);
         $count = mysqli_num_rows($select);
         if ($count > 0) {
-                echo "Data retrieved successfully...</br>";
-                echo "<table>";
+            echo "Data retrieved successfully...</br>";
+            echo "<table>";
+            echo "<tr>";
+            echo "<th>ID</th>";
+            echo "<th>Username</th>";
+            echo "<th>Email</th>";
+            echo "<th>Password</th>";
+            echo "<th>Joined</th>";
+            echo "<th>Action</th>";
+            echo "</tr>";
+            while ($row = mysqli_fetch_array($select)) {
                 echo "<tr>";
-                echo "<th>ID</th>";
-                echo "<th>Username</th>";
-                echo "<th>Email</th>";
-                echo "<th>Password</th>";
-                echo "<th>Action</th>";
+                echo "<td>" . $row['id'] . "</td>";
+                echo "<td>" . $row['username'] . "</td>";
+                echo "<td>" . $row['email'] . "</td>";
+                echo "<td>" . $row['password'] . "</td>";
+                echo "<td>" . $row['joined'] . "</td>";
+                echo "<td><a href='edit.php?id=" . $row['id'] . "'>Edit</a> | <a href='delete.php?id=" . $row['id'] . "'>Delete</a></td>";
                 echo "</tr>";
-                while ($row = mysqli_fetch_array($select)) {
-                    echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['username'] . "</td>";
-                    echo "<td>" . $row['email'] . "</td>";
-                    echo "<td>" . $row['password'] . "</td>";
-                    echo "<td><a href='edit.php?id=" . $row['id'] . "'>Edit</a> | <a href='delete.php?id=" . $row['id'] . "'>Delete</a></td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
-            
+            }
+            echo "</table>";
         } else {
             echo "No data found...";
         }

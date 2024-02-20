@@ -10,39 +10,30 @@
 
 <body>
     <div class="container">
-    <?php
-    // Write your code to insert data
-    if (isset($_POST['submit'])) {
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $conn = mysqli_connect("localhost:3308", "root", "", "phpparina");
-        if (!$conn) {
-            die('Connection Failed :');
-        } else {
-            echo "Connection Successful...<br/>";
-            $insert_query = "insert into reg_table(username, email, password) values('$username', '$email', '$password')";
-            $insert = mysqli_query($conn, $insert_query);
-            if ($insert) {
-                echo "Registration Successful...<br/>";
+        <?php
+        // Write your code to insert data
+        if (isset($_POST['submit'])) {
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $conn = mysqli_connect("localhost:3307", "root", "", "php_database");
+            if (!$conn) {
+                die('Connection Failed :');
             } else {
-                echo "Registration Failed...<br/>";
+                echo "Connection Successful...<br/>";
+                $insert_query = "insert into reg_info(username, email, password) values('$username', '$email', '$password')";
+                $insert = mysqli_query($conn, $insert_query);
+                if ($insert) {
+                    echo "Registration Successful...<br/>";
+                } else {
+                    echo "Registration Failed...<br/>";
+                }
             }
         }
-    }
-    // $connection = mysqli_connect("localhost:3308", "root", "", "phpparina");
-    // if($connection){
-    //     echo "Connection successful";
-    
+        ?>
 
-    // }else{
-    //     die("Connection failed because: ".mysqli_connect_error());
-    // }
-    
-    ?>
+        <br />
 
-    <br />
-    
         <h2>User Registration Form</h2>
 
         <form action="reg.php" method="POST">

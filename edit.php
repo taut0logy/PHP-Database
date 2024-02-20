@@ -13,7 +13,7 @@
 
     <?php
 
-    $connection = mysqli_connect("localhost:3308", "root", "", "phpparina");
+    $connection = mysqli_connect("localhost:3307", "root", "", "php_database");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
@@ -21,10 +21,10 @@
     if (isset($_REQUEST['id'])) {
         // Write code to retrieve data
         $id = $_REQUEST['id'];
-        $select_query = "select * from reg_table where id = $id";
+        $select_query = "select * from reg_info where id = $id";
         $info = mysqli_query($connection, $select_query);
         while ($row = mysqli_fetch_assoc($info)) {
-            ?>
+    ?>
             <div class="container">
                 <h2>Update Data</h2>
                 <form action="update.php" method="POST">
@@ -33,14 +33,16 @@
                     <label for="email">Email</label>
                     <input type="email" name="email" value="<?php echo $row['email'] ?>">
                     <label for="password">Password</label>
-                    <input type="password" name="password" value="<?php echo $row['username'] ?>">
-                    <input type="submit" name="submit" value="Update">
+                    <input type="password" name="password" value="<?php echo $row['password'] ?>">
                     <!-- Write code to send hidden id -->
                     <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                    <input type="submit" name="submit" value="Update">
+
+
                 </form>
             </div>
 
-            <?php
+    <?php
         }
     }
     mysqli_close($connection);
