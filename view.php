@@ -22,15 +22,17 @@
         $count = mysqli_num_rows($select);
         if ($count > 0) {
             echo "Data retrieved successfully...</br>";
-            echo "<table>";
-            echo "<tr>";
-            echo "<th>ID</th>";
-            echo "<th>Username</th>";
-            echo "<th>Email</th>";
-            echo "<th>Password</th>";
-            echo "<th>Joined</th>";
-            echo "<th>Action</th>";
-            echo "</tr>";
+    ?>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Joined</th>
+                    <th>Action</th>
+                </tr>
+        <?php
             while ($row = mysqli_fetch_array($select)) {
                 echo "<tr>";
                 echo "<td>" . $row['id'] . "</td>";
@@ -38,16 +40,15 @@
                 echo "<td>" . $row['email'] . "</td>";
                 echo "<td>" . $row['password'] . "</td>";
                 echo "<td>" . $row['joined'] . "</td>";
-                echo "<td><a href='edit.php?id=" . $row['id'] . "'>Edit</a> | <a href='delete.php?id=" . $row['id'] . "'>Delete</a></td>";
+                echo "<td><a href='edit.php?id=" . $row['id'] . "'>Edit</a> | <a href='delete.php?id=" . $row['id']
+                    . "'>Delete</a></td>";
                 echo "</tr>";
             }
             echo "</table>";
         } else {
             echo "No data found...";
         }
-    }
-
-    ?>
+    } ?>
 
 
 </body>
